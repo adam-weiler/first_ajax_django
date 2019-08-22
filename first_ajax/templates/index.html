@@ -8,12 +8,18 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"> </script>
   </head>
   <body>
-    <section>
+    <section id="first">
       <h2>Step 1, Step 2</h2>
       <p>
         <button id='get_root'>Run AJAX Request Root</button>
       </p>
     </section>
-
+    <section id="second">
+        <h2>Step 3, Step 4, Step 5, Step 6</h2>
+        <p>
+          <button id='get_ping'>Run AJAX Request to Ping/Pong</button>
+        </p>
+        <div id='ping_data'></div>
+      </section>
   </body>
 </html>

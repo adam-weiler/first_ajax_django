@@ -1,13 +1,34 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const ajaxRequestButton = document.querySelector('#get_root');
-    console.log('-- Logging out the button: ', ajaxRequestButton);
+    const rootRequestButton = document.querySelector('#get_root');
+    const pingRequestButton = document.querySelector('#get_ping');
+    const pingDataElem = document.querySelector('#ping_data');
 
-    ajaxRequestButton.addEventListener('click', () => {
-        console.log('-- Clicked the Run AJAX Request Root button. ');
+    console.log('-- Logging out the Root button: ', rootRequestButton);
+    console.log('-- Logging out the Ping button: ', pingRequestButton);
+    console.log('-- Logging out the Ping Data div: ', pingDataElem);
+
+    rootRequestButton.addEventListener('click', () => {
+        console.log('-- Clicked the Run AJAX Request Root button.');
 
         axios.get('http://intro-ajax-api.herokuapp.com/');
+    });
 
-    })
 
-    
+
+    pingRequestButton.addEventListener('click', () => {
+        console.log('-- Clicked the Run AJAX Request to Ping/Pong button.');
+
+        axios.get('http://intro-ajax-api.herokuapp.com/ping')
+        .then((response) => {
+            console.log('-- Receieved response.');
+            console.log(response.data);
+
+            const dataElem = document.createElement('p');
+            dataElem.innerHTML = response.data;
+
+            pingDataElem.innerHTML = '';
+
+            pingDataElem.appendChild(dataElem);
+        });
+    });   
 });
