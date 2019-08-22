@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
     pingRequestButton.addEventListener('click', () => {
         console.log('-- Clicked the Run AJAX Request to Ping/Pong button.');
 
-        axios.get('http://intro-ajax-api.herokuapp.com/ping')
+        // axios.get('http://intro-ajax-api.herokuapp.com/ping')
+        axios.get('http://intro-ajax-api.herokuapp.com/pong')
         .then((response) => {
             console.log('-- Receieved response.');
             console.log(response.data);
@@ -29,6 +30,18 @@ document.addEventListener("DOMContentLoaded", function() {
             pingDataElem.innerHTML = '';
 
             pingDataElem.appendChild(dataElem);
-        });
+        })
+        .catch((error) => {
+            console.log('-- Receieved error.');
+            console.log(error);
+
+            const dataElem = document.createElement('p');
+            dataElem.innerHTML = `${error}<br/>So sorry for the inconvenience!`;
+
+            pingDataElem.innerHTML = '';
+
+            pingDataElem.appendChild(dataElem);
+
+        })
     });   
 });
