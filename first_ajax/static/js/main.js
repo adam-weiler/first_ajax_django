@@ -41,7 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
             pingDataElem.innerHTML = '';
 
             pingDataElem.appendChild(dataElem);
-
+        })
+        .then(() => {
+            console.log('Hey, the request finished!');
         })
     });   
 });
