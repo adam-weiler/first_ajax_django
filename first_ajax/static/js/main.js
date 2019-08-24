@@ -11,24 +11,29 @@ document.addEventListener("DOMContentLoaded", function() {
     //Step 8
     const timeRequestButton = document.querySelector('#get_time');
     const timeDataElem = document.querySelector('#time_data');
-
+    //Step 9
+    const carRequestButton = document.querySelector('#get_car');
+    const carDataElem = document.querySelector('#car_data');
     
-
     // console.log('-- Logging out the Root button: ', rootRequestButton);
     // console.log('-- Logging out the Ping button: ', pingRequestButton);
     // console.log('-- Logging out the Ping Data div: ', pingDataElem);
     // console.log('-- Logging out the Count button: ', countRequestButton);
     // console.log('-- Logging out the Count Data div: ', countDataElem);
+    // console.log('-- Logging out the Time button: ', timeRequestButton);
+    // console.log('-- Logging out the Time Data div: ', timeDataElem);
+    // console.log('-- Logging out the Car button: ', carRequestButton);
+    // console.log('-- Logging out the Car Data div: ', carDataElem);
 
 
-    rootRequestButton.addEventListener('click', () => {
+    rootRequestButton.addEventListener('click', () => {  // User clicks on Request Root button.
         console.log('-- Clicked the \'Run AJAX Request Root\' button.');
 
         axios.get(url);
     });
 
 
-    pingRequestButton.addEventListener('click', () => {
+    pingRequestButton.addEventListener('click', () => {  // User clicks on Request Ping/Pong button.
         console.log('-- Clicked the \'Run AJAX Request to Ping/Pong\' button.');
 
         axios.get(`${url}/ping`)
@@ -60,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     
-    countRequestButton.addEventListener('click', () => {
+    countRequestButton.addEventListener('click', () => {  // User clicks on Request to Count button.
         console.log('-- Clicked the Run \'AJAX Request to Count\' button.');
         const dataElem = document.createElement('p');
 
@@ -78,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
             dataElem.innerHTML = `${error}<br/>So sorry for the inconvenience!`;
         })
         .then(() => {
-            console.log('-- Request is over, regardless if it worked or not.');
+            console.log('-- Request is over.');
 
             countDataElem.innerHTML = '';
             countDataElem.appendChild(dataElem);
@@ -86,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    timeRequestButton.addEventListener('click', () => {
+    timeRequestButton.addEventListener('click', () => {  // User clicks on Request to Time button.
         console.log('-- Clicked the Run \'AJAX Request to Time\' button.');
         const dataElem = document.createElement('p');
 
@@ -110,13 +115,36 @@ document.addEventListener("DOMContentLoaded", function() {
             dataElem.innerHTML = `${error}<br/>So sorry for the inconvenience!`;
         })
         .then(() => {
-            console.log('-- Request is over, regardless if it worked or not.');
+            console.log('-- Request is over.');
 
             timeDataElem.innerHTML = '';
             timeDataElem.appendChild(dataElem);
         });
+    });
 
-    })
 
+    carRequestButton.addEventListener('click', () => {  // User clicks on Request to Car button.
+        console.log('-- Clicked the Run \'AJAX Request to a Car\' button.');
+        const dataElem = document.createElement('ul');
 
+        axios.get(`${url}/a_car`)
+        .then((response) => {
+            console.log('-- Received response.');
+            console.log(response.data);
+
+            dataElem.innerHTML = response.data;
+        })
+        .catch((error) => {
+            console.log('-- Received error.');
+            console.log(error);
+
+            dataElem.innerHTML = `${error}<br/>So sorry for the inconvenience!`;
+        })
+        .then(() => {
+            console.log('-- Request is over.');
+
+            carDataElem.innerHTML = '';
+            carDataElem.appendChild(dataElem);
+        });
+    });
 });
